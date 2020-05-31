@@ -129,7 +129,18 @@
                     The new award winning XPS 13 2-in-1. Beautifully versatile 2-in-1 design with InfinityEdge display all in a remarkably mobile form factor.
                 </p>
                 <div class="mt-2">
-                    <button id="btnbuybottom" class="btn btn-outline-success my-2 my-sm-0 fade" type="submit">Buy Now</button>
+                  <a href="/details/3">
+                    <button class="btn btn-outline-success my-2 my-sm-0 fade btnbuy1" type="submit">Buy Now</button>
+                  </a>
+                  <a href="/details/4">
+                    <button class="btn btn-outline-success my-2 my-sm-0 btnbuy2" style="display:none;" type="submit">Buy Now</button>
+                  </a>
+                  <a href="/details/5">
+                    <button  class="btn btn-outline-success my-2 my-sm-0 btnbuy3" style="display:none;" type="submit">Buy Now</button>
+                  </a>
+                  <a href="/details/6">
+                    <button class="btn btn-outline-success my-2 my-sm-0 btnbuy4" style="display:none;" type="submit">Buy Now</button>
+                  </a>
                 </div>
                 <div class="nextprev mt-5">
                     <i class="fas fa-chevron-left" onclick="changeBrandBackward()"></i>
@@ -150,24 +161,26 @@
         $('#brandname'+value).hide();
         $('#branddesc'+value).hide();
         $('#brandimage'+value).hide();
-        $('#btnbuybottom').hide();
+        $('.btnbuy'+value).hide();
         value++;
         if(value == 5)
             value = 1;
         $('#brandname'+value).fadeIn(1000);
         $('#branddesc'+value).fadeIn(1000);
         $('#brandimage'+value).fadeIn(1000);
-        $('#btnbuybottom').fadeIn(1000);
+        $('.btnbuy'+value).fadeIn(1000);
     }
     function changeBrandBackward(){
         $('#brandname'+value).hide();
         $('#branddesc'+value).hide();
         $('#brandimage'+value).hide();
+        $('.btnbuy'+value).hide();
         value--;
         if(value == 0)
             value = 4;
         $('#brandname'+value).fadeIn(1000);
         $('#branddesc'+value).fadeIn(1000);
+        $('.btnbuy'+value).fadeIn(1000);
         $('#brandimage'+value).fadeIn(1000);
     }
     window.addEventListener("scroll", function (event) {

@@ -44,7 +44,7 @@ class UserController extends Controller
                     ->withInput(); 
         }
         //session
-        session()->flash('msg','You have login');
+        session()->flash('msg','Welcome, ' . Auth::guard('user')->user()->name);
         //redirect
         return redirect('/');
     }

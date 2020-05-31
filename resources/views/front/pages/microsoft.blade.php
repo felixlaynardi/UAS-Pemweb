@@ -70,7 +70,9 @@
 <nav class="navbar sticky-top navbar-lightcontainerflex" id="productnav" style="margin:auto;z-index: 1;">
     <div class="navbar-light container" style="margin:auto;">
         <a class="navbar-brand title fade" href="#">Surface Laptop 3</a>
-        <button class="btn btn-outline-success my-2 my-sm-0 fade" type="submit">Buy Now</button>
+        <a href="/details/7">
+          <button class="btn btn-outline-success my-2 my-sm-0 fade" type="submit">Buy Now</button>
+        </a>
     </div>
 </nav>
 <div class="container">
@@ -125,7 +127,18 @@
                 <img src="front_assets/microsoft/Platinum.png" class="colorchoose" alt="">
             </button>
             <div class="col-6 mx-auto mt-5">
-                <button id="btnbuybottom" class="btn btn-block btn-outline-success my-2 my-sm-0 fade" type="submit">Buy Now</button>
+            <a href="/details/7">
+              <button class="btn btn-outline-success my-2 my-sm-0 fade sandstone btnbuy" type="submit">Buy Now</button>
+            </a>
+            <a href="/details/8">
+              <button class="btn btn-outline-success my-2 my-sm-0 matteblack btnbuy" style="display:none;" type="submit">Buy Now</button>
+            </a>
+            <a href="/details/9">
+              <button  class="btn btn-outline-success my-2 my-sm-0 cobaltblue btnbuy" style="display:none;" type="submit">Buy Now</button>
+            </a>
+            <a href="/details/10">
+              <button class="btn btn-outline-success my-2 my-sm-0 platinum btnbuy" style="display:none;" type="submit">Buy Now</button>
+            </a>
             </div>
         </div>
     </div>
