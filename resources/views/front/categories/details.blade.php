@@ -18,7 +18,7 @@
                 @csrf
            @if($product->stock > 0)
                 <div class="form-group">
-                <label for="qty">product stock is {{$product->stock}}</label>
+                <label for="qty">Product stock : {{$product->stock}}</label>
                 <input type="number" min="1" max="{{$product->stock}}" class="form-control" name="qty" value="" placeholder="Quantity">
                 </div>
 
@@ -31,15 +31,10 @@
 
             
             <h6>{{$product->description}}</h6>
-            <div class="col-lg-10 mx-auto">
-                <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_zrXGmy.json"  background="transparent"  speed="1" loop  autoplay></lottie-player>
-            </div>
-
-            
                 <input type="hidden" name="id" value="{{$product->id}}">
                 <input type="hidden" name="name" value="{{$product->name}}">
                 <input type="hidden" name="price" value="{{$product->price}}">
-                <button type="submit" class="btn btn-block btn-outline-success mb-5"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                <button type="submit" class="btn btn-block btn-outline-success mt-5 mb-5"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
 
             </form>
 
@@ -55,7 +50,7 @@
         @foreach ($upsell as $pro)
             <div class="col-lg-4 mb-5">
             <div class="products ct1 center pb-5">
-            <p class="producttext p-3">{{$pro->name}}</p>
+            <p class="producttext p-3">{{Str::limit($pro->name, 20)}}</p>
             <div class="imagecategory" style="background-image: url('{{url('uploads')}}/{{$pro->image}}');">
 
                 </div>

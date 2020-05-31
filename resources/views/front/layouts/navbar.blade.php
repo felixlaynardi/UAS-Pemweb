@@ -12,17 +12,21 @@
 <body>
     
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background: #EEF3FF;">
-        <div class="navbar-brand nv2">
+        <div class="navbar-brand nv2 {{Session::get('bell1')}}">
 
             @if(Auth::guard('user')->check())
                 <button style="border:none;background:none;" class="profilehref dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{{url('uploads/')}}/{{Auth::guard('user')->user()->image}}" alt="" height="30px" width="30px" style="border-radius: 100%;margin:5px">
+                    @if(Auth::guard('user')->user()->image == "placeholder.webp")
+                      <img src="{{url('uploads/')}}/profile.webp" alt="" height="30px" width="30px" style="border-radius: 100%;margin:5px">
+                    @else
+                      <img src="{{url('uploads/')}}/{{Auth::guard('user')->user()->image}}" alt="" height="30px" width="30px" style="border-radius: 100%;margin:5px">
+                    @endif
                     Hello, {{Str::limit(Auth::guard('user')->user()->name, 10)}}
                 </button>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="/edit"><i class="fas fa-user-edit"></i> Edit Profile</a>
-                    <a class="dropdown-item" href="/cart"><i class="fas fa-shopping-cart"></i> Shopping Cart</a>
+                    <a class="dropdown-item {{Session::get('bell2')}}" href="/cart"><i class="fas fa-shopping-cart"></i> Shopping Cart</a>
                     <a class="dropdown-item" href="/history"><i class="fas fa-history"></i> Transaction History</a>
                     <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>

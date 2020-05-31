@@ -11,6 +11,7 @@ use App\OrderItems;
 use Illuminate\Support\Facades\Auth;
 Use Carbon\Carbon;
 use App\History;
+use Illuminate\Support\Facades\Session;
 
 
 class CartController extends Controller
@@ -30,7 +31,7 @@ class CartController extends Controller
         //add cart
         $id = $request->id;
         $name = $request->name;
-        $price = (int)$request->price;   
+        $price = (int)$request->price;
         $qty = (int)$request->qty;
 
         if($qty > $product->stock){
@@ -40,16 +41,41 @@ class CartController extends Controller
         }
 
 
-        Cart::add($id,$name, $qty,$price,0, ['size' => 'large'])->associate('App\Productasdfsd');
-        
+        Cart::add($id,$name, $qty,$price,0, ['size' => 'large'])->associate('App\Product');
+
+        //update
+        $product->update([
+            'stock'=>$product->stock - $qty,
+        ]);
+
+        //session nav bar
+        Session::put('bell1', 'shopcart');
+        Session::put('bell2', 'shopcart2');
         //session
         session()->flash('msg', 'Your item has been added to the cart');
         return redirect('/categories');
     }
     public function destroy(Request $request, $id){
+        //order_qty & product_stock
         Cart::remove($id);
+        //update stock
+        $product = Product::find($request->product_id);
 
-        return redirect()->back()->with('msg','item removed');
+        $stock = (int)$request->Order_qty + (int)$request->product_stock;
+        //update
+
+        $product->update([
+            'stock'=>$stock,
+        ]);
+        //if cart = 0
+        if(Cart::count() == 0){
+            Session::forget('bell1');
+            Session::forget('bell2');
+
+        }
+
+
+        return redirect()->back()->with('msg','Item has been removed');
     }
 
     public function order(){
@@ -80,7 +106,7 @@ class CartController extends Controller
             $product->update([
                 'stock'=>$curr
             ]);
-            
+
 
             //adding to history
             $history = new History;
@@ -99,7 +125,10 @@ class CartController extends Controller
         //destroy all cart
         Cart::instance('default')->destroy();
 
-        
+        //session destroy
+        Session::forget('bell1');
+        Session::forget('bell2');
+
         //redirect
         return redirect('/');
     }

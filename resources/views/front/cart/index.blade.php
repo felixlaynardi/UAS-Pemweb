@@ -14,7 +14,7 @@ Cart
         <h4 class="alert-heading">{{session('msg')}}</h4>
     </div>
     @endif
-    <h2 class="mt-5"><i class="fa fa-shopping-cart"></i> Shooping Cart</h2>
+    <h2 class="mt-5"><i class="fa fa-shopping-cart"></i> Shopping Cart</h2>
     <hr>
     @if(Cart::instance('default')->content())
     
@@ -77,8 +77,10 @@ Cart
 
                             <form action="{{route('cart.remove',$item->rowId)}}" method="post">
                                 @csrf
-                               
-                                <button type="submit"><i class="fas fa-times" style="color:red;" title="Delete Item"></i></button>
+                                <input type="hidden" value="{{$item->model->id}}" name="product_id">
+                                <input type="hidden" value="{{$item->qty}}" name="Order_qty">
+                                <input type="hidden" value="{{$item->model->stock}}" name="product_stock">
+                                <button type="submit" style="border:none;background:none;"><i class="fas fa-times" style="color:red;" title="Delete Item"></i></button>
                               </form>
                                 
 
@@ -157,13 +159,15 @@ Cart
                 <!-- Save for later  -->
                 <div class="col-md-12" style="float: right;">
                     <a href="/categories"><button class="btn btn-outline-dark">Continue Shopping</button></a>
+                    @if(Cart::count() > 0)
                     <a href="/order"><button class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> Proceed to checkout</button></a>
+                    @endif
                 <hr>
 
                 </div>
 
                 @else
-                  <h1>sory you don't have any item</h1>
+                  <h1>Sorry you don't have any item</h1>
                 @endif
 
                 

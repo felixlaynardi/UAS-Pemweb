@@ -39,7 +39,11 @@
         <div class="row pt-2" style="margin:0;">
             <div class="container col-lg-6" id="loginAnimation" style="padding:0;text-align:center;">
                 <div class="inputimage">
-                    <img src="uploads/{{Auth::guard('user')->user()->image}}" alt="" id="profilephotonow">
+                    @if(Auth::guard('user')->user()->image == "placeholder.webp")
+                        <img src="uploads/profile.webp" alt="" id="profilephotonow">
+                    @else
+                        <img src="uploads/{{Auth::guard('user')->user()->image}}" alt="" id="profilephotonow">
+                    @endif
                 </div>
                 <br>
                 <label for="profilephoto">
