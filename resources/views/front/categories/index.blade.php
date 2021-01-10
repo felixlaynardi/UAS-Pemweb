@@ -6,6 +6,7 @@
 
 @section('content')
 <link rel="stylesheet" href="front_assets/category/styleCategory.css">
+<script> var key = 0;</script>
 <div class="container">
     @if (Session::has('msg'))
         <div class="alert alert-success mt-5" role="alert">
@@ -60,10 +61,10 @@
                     @endforeach
                     <form class="mt-5">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="lowestprice" onchange="searchPrice()" name="low" placeholder="Lowest Price">
+                            <input type="number" class="form-control" id="lowestprice" onchange="searchPrice()" name="low" placeholder="Lowest Price">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="highestprice" onchange="searchPrice()" name="high" placeholder="Highest Price">
+                            <input type="number" class="form-control" id="highestprice" onchange="searchPrice()" name="high" placeholder="Highest Price">
                         </div>
                     </form>
                 
@@ -79,29 +80,31 @@
     function searchPrice(){
         var $radios = $('input:radio[name=exampleRadios]');
         $radios.filter('[value=allproduct]').prop('checked', true);
-        var low = document.getElementById("lowestprice").value;
-        var high = document.getElementById("highestprice").value;
+        var low = parseInt( $('#lowestprice').val() );
+        var high = parseInt( $('#highestprice').val() );
         $('.category').hide();
-        if(low != '' && high != ''){
+        if(!isNaN(low) && !isNaN(high)){
             for(i = 0; i < key; i++){
-                price = $('#price'+i).val();
+                price = parseInt( $('#price'+i).val() );
                 if(price >= low && price <= high){
                     $('.price-'+i).fadeIn(1000);
                 }
             }
         }
-        else if(high != ''){
+        else if(!isNaN(high)){
             for(i = 0; i < key; i++){
-                price = $('#price'+i).val();
+                price = parseInt( $('#price'+i).val() );
                 if(price <= high){
+                    // console.log(price + " < " + high);
                     $('.price-'+i).fadeIn(1000);
                 }
             }
         }
-        else if(low != ''){
+        else if(!isNaN(low)){
             for(i = 0; i < key; i++){
-                price = $('#price'+i).val();
+                price = parseInt( $('#price'+i).val() );
                 if(price >= low){
+                    // console.log(price + " > " + low);
                     $('.price-'+i).fadeIn(1000);
                 }
             }
